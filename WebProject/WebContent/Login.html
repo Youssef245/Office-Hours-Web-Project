@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="Input_info.css">
+<meta charset="windows-1256">
+<title>Login</title>
+</head>
+<body>
+<div class="login-container">
+  <section class="login" id="login">
+    <header>
+      <h2>Office Hour Application</h2>
+      <h4>Login Page</h4>
+    </header>
+    <form class="login-form" onsubmit="return false;" method="POST">
+      <input class="login-input" type="Text" id="email" name="email" placeholder="Email" required><br>
+      <input class="login-input" type="password" id="password" name="password" placeholder="Password" required><br>
+      <br><br>
+      <div class="submit-container">
+        <button class="login-button" onclick="Validate()" >Login</button>
+      </div>
+     
+     <div class="login-input" id="demo"></div>
+      <a href="SignUp.jsp">Sign Up</a>
+    </form>
+</section>
+</div>
+  <script>
+  function Validate() {
+    var xhttp = new XMLHttpRequest();
+    var email= document.getElementById("email").value;
+    var password = document.getElementById("password").value;
+    xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      if(this.responseText=="Student"||this.responseText=="Staff Member")
+        window.location.href = 'Home.jsp';
+      else
+    document.getElementById("demo").innerHTML = this.responseText
+      }
+    };
+    xhttp.open("POST", "validate", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("email="+email+"&password="+password);
+  }
+
+</script>
+</body>
+</html>
